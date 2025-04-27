@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>100 Men vs Gorilla!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>100 MEN vs. GORILLA</h1>
+    <p>You are the GORILLA! Use Arrow Keys or WASD to move. Boop all 100 men!</p>
+
+    <div id="game-area">
+        <div id="gorilla">🦍</div>
+        <!-- Men will be added here by JavaScript -->
+    </div>
+
+    <div id="info">
+        Men Booped: <span id="score">0</span> / 100
+    </div>
+
+    <div id="message" class="hidden">
+        <p id="message-text"></p>
+        <button id="restart-button">Play Again?</button>
+    </div>
+
+    <!-- Silly Sounds (Optional - find free sounds online!) -->
+    <audio id="boop-sound" src="huuah.wav"></audio>
+    <!-- <audio id="win-sound" src="sounds/win.wav"></audio> -->
+    <!-- <audio id="bg-music" src="sounds/silly_music.mp3" loop></audio> -->
+
+    <script src="script.js"></script>
+</body>
+</html>

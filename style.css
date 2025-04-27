@@ -1,0 +1,113 @@
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif; /* Peak silliness */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: lightgreen;
+    overflow: hidden; /* Prevent scrollbars if things go off screen */
+}
+
+h1 {
+    color: darkred;
+    text-shadow: 2px 2px yellow;
+}
+
+#game-area {
+    width: 80vw; /* Responsive width */
+    max-width: 600px; /* Max size */
+    height: 70vh; /* Responsive height */
+    max-height: 450px; /* Max size */
+    border: 5px dashed brown;
+    background-color: lightgoldenrodyellow;
+    position: relative; /* Crucial for positioning children */
+    overflow: hidden; /* Keep elements inside */
+    margin-top: 10px;
+}
+
+#gorilla {
+    position: absolute;
+    bottom: 10px; /* Start at bottom center */
+    left: 50%;
+    transform: translateX(-50%); /* Center horizontally */
+    width: 50px;
+    height: 50px;
+    /* background-color: grey; */ /* Use emoji or image */
+    /* border-radius: 50%; */
+    font-size: 40px; /* Emoji size */
+    line-height: 50px; /* Center emoji vertically */
+    text-align: center;
+    user-select: none; /* Prevent selecting the emoji */
+    transition: transform 0.1s linear; /* Smooth turning */
+}
+
+.man {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    /* background-color: blue; */ /* Use emoji or image */
+    font-size: 20px; /* Emoji size */
+    line-height: 25px;
+    text-align: center;
+    user-select: none;
+    /* border-radius: 50%; */
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out; /* For booping effect */
+}
+
+/* Silly walking animation */
+@keyframes wiggle {
+    0% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+    100% { transform: rotate(-5deg); }
+}
+
+/* Apply animation to men optionally */
+/* .man { animation: wiggle 0.5s infinite ease-in-out; } */
+
+#info {
+    margin-top: 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+#message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 0, 0.85);
+    border: 3px solid red;
+    padding: 30px;
+    text-align: center;
+    font-size: 1.5em;
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+    z-index: 100; /* Make sure it's on top */
+}
+
+#message button {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-size: 1em;
+    padding: 10px 20px;
+    margin-top: 15px;
+    cursor: pointer;
+    background-color: lightcoral;
+    border: 2px solid darkred;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+#message button:hover {
+    background-color: red;
+    color: white;
+}
+
+.hidden {
+    display: none;
+}
+
+.booped {
+    /* Style for when a man gets booped */
+    transform: scale(2) rotate(720deg) translate(0, -200px); /* Fly up and spin */
+    opacity: 0;
+    transition: transform 1s ease-out, opacity 1s ease-out;
+}
