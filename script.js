@@ -7,6 +7,12 @@ const restartButton = document.getElementById('restart-button');
 const boopSound = document.getElementById('boop-sound');
 // const winSound = document.getElementById('win-sound');
 // const bgMusic = document.getElementById('bg-music'); // Optional
+const btnUp = document.getElementById('btn-up');
+const btnDown = document.getElementById('btn-down');
+const btnLeft = document.getElementById('btn-left');
+const btnRight = document.getElementById('btn-right');
+const touchControls = document.getElementById('touch-controls'); // Get the container
+
 
 const gameAreaRect = gameArea.getBoundingClientRect();
 const gorillaSize = 50; // Match CSS width/height roughly
@@ -101,11 +107,13 @@ function moveGorilla() {
     let dx = 0;
     let dy = 0;
 
-    if (keysPressed['ArrowLeft'] || keysPressed['a']) dx -= 1;
-    if (keysPressed['ArrowRight'] || keysPressed['d']) dx += 1;
-    if (keysPressed['ArrowUp'] || keysPressed['w']) dy -= 1;
-    if (keysPressed['ArrowDown'] || keysPressed['s']) dy += 1;
+    // Check the canonical arrow key names
+    if (keysPressed['arrowleft']) dx -= 1;
+    if (keysPressed['arrowright']) dx += 1;
+    if (keysPressed['arrowup']) dy -= 1;
+    if (keysPressed['arrowdown']) dy += 1;
 
+    // Rest of the function remains the same...
     // Get current position (handle potential % values)
     let currentX = gorilla.offsetLeft;
     let currentY = gorilla.offsetTop;
@@ -131,7 +139,6 @@ function moveGorilla() {
 
     gorilla.style.left = `${nextX}px`;
     gorilla.style.top = `${nextY}px`; // Use top for positioning
-    // We used 'bottom' initially in CSS, switch to 'top' for consistency
     gorilla.style.bottom = 'auto';
 }
 
@@ -247,11 +254,17 @@ function endGame(gorillaWon) {
 
 // --- Event Listeners ---
 
+
 document.addEventListener('keydown', (e) => {
     // Use 'a' for left, 'd' for right, 'w' for up, 's' for down
     const key = e.key.toLowerCase();
     if (['arrowleft', 'arrowright', 'arrowup', 'arrowdown', 'a', 'd', 'w', 's'].includes(key)) {
         keysPressed[key] = true;
+        // Map WASD to arrow keys internally for simplicity in moveGorilla
+        if (key === 'a') keysPressed['arrowleft'] = true;
+        if (key === 'd') keysPressed['arrowright'] = true;
+        if (key === 'w') keysPressed['arrowup'] = true;
+        if (key === 's') keysPressed['arrowdown'] = true;
     }
 });
 
@@ -259,8 +272,49 @@ document.addEventListener('keyup', (e) => {
     const key = e.key.toLowerCase();
     if (keysPressed[key]) {
         delete keysPressed[key];
+        // Also delete the mapped arrow key if WASD was released
+        if (key === 'a') delete keysPressed['arrowleft'];
+        if (key === 'd') delete keysPressed['arrowright'];
+        if (key === 'w') delete keysPressed['arrowup'];
+        if (key === 's') delete keysPressed['arrowdown'];
     }
 });
+
+// --- Touch Event Listeners ---
+
+// Helper function to handle touch start
+function handleTouchStart(e, key) {
+    e.preventDefault(); // Prevent scrolling/zooming
+    keysPressed[key] = true;
+}
+
+// Helper function to handle touch end
+function handleTouchEnd(e, key) {
+    // e.preventDefault(); // Might not be needed/wanted on touchend
+    delete keysPressed[key];
+}
+
+// Add listeners for each button
+btnUp.addEventListener('touchstart', (e) => handleTouchStart(e, 'arrowup'), { passive: false });
+btnUp.addEventListener('touchend', (e) => handleTouchEnd(e, 'arrowup'));
+btnUp.addEventListener('touchcancel', (e) => handleTouchEnd(e, 'arrowup')); // Handle interruptions
+
+btnDown.addEventListener('touchstart', (e) => handleTouchStart(e, 'arrowdown'), { passive: false });
+btnDown.addEventListener('touchend', (e) => handleTouchEnd(e, 'arrowdown'));
+btnDown.addEventListener('touchcancel', (e) => handleTouchEnd(e, 'arrowdown'));
+
+btnLeft.addEventListener('touchstart', (e) => handleTouchStart(e, 'arrowleft'), { passive: false });
+btnLeft.addEventListener('touchend', (e) => handleTouchEnd(e, 'arrowleft'));
+btnLeft.addEventListener('touchcancel', (e) => handleTouchEnd(e, 'arrowleft'));
+
+btnRight.addEventListener('touchstart', (e) => handleTouchStart(e, 'arrowright'), { passive: false });
+btnRight.addEventListener('touchend', (e) => handleTouchEnd(e, 'arrowright'));
+btnRight.addEventListener('touchcancel', (e) => handleTouchEnd(e, 'arrowright'));
+
+// Prevent touch events on the controls container itself from scrolling the page
+touchControls.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+}, { passive: false });
 
 restartButton.addEventListener('click', () => {
     gorilla.textContent = '🦍'; // Reset gorilla emoji

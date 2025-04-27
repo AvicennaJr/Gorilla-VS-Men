@@ -111,3 +111,100 @@ h1 {
     opacity: 0;
     transition: transform 1s ease-out, opacity 1s ease-out;
 }
+
+
+/* Add these styles to your existing style.css */
+
+#touch-controls {
+    position: fixed; /* Keep it fixed on the screen */
+    bottom: 20px;
+    left: 20px;
+    z-index: 50; /* Ensure it's above game area if overlapping */
+    opacity: 0.7; /* Make it slightly transparent */
+    /* Hide on non-touch devices (optional but recommended) */
+    display: none;
+}
+
+/* Show controls only on touch devices using media query */
+@media (hover: none) and (pointer: coarse) {
+  #touch-controls {
+    display: block;
+  }
+    /* Optionally hide the keyboard instruction text */
+    body > p {
+        /* Adjust selector if your <p> is structured differently */
+        /* display: none; */ /* Uncomment if you want to hide text */
+    }
+}
+
+
+.d-pad {
+    position: relative;
+    width: 120px; /* Adjust size as needed */
+    height: 120px;
+    transform: rotate(45deg); /* Rotate the container for diamond shape */
+}
+
+.d-pad-btn {
+    position: absolute;
+    width: 50px; /* Size of individual buttons */
+    height: 50px;
+    background-color: rgba(100, 100, 100, 0.8);
+    border: 2px solid rgba(50, 50, 50, 0.9);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none; /* Prevent text selection */
+    -webkit-user-select: none; /* Safari */
+    -webkit-tap-highlight-color: transparent; /* Remove tap highlight */
+    transform-origin: center center;
+}
+
+/* Un-rotate the text/icons inside the buttons */
+.d-pad-btn span, .d-pad-btn {
+     transform: rotate(-45deg);
+}
+
+
+/* Positioning the diamond buttons */
+.d-pad-up {
+    top: 0;
+    left: calc(50% - 25px); /* Center horizontally */
+    border-radius: 50% 50% 0 0; /* Rounded top */
+}
+
+.d-pad-down {
+    bottom: 0;
+    left: calc(50% - 25px); /* Center horizontally */
+    border-radius: 0 0 50% 50%; /* Rounded bottom */
+}
+
+.d-pad-left {
+    left: 0;
+    top: calc(50% - 25px); /* Center vertically */
+     border-radius: 50% 0 0 50%; /* Rounded left */
+}
+
+.d-pad-right {
+    right: 0;
+    top: calc(50% - 25px); /* Center vertically */
+     border-radius: 0 50% 50% 0; /* Rounded right */
+}
+
+
+/* Style for when button is being pressed */
+.d-pad-btn:active {
+    background-color: rgba(50, 50, 50, 1);
+    transform: rotate(-45deg) scale(0.95); /* Add slight shrink effect */
+}
+
+/* Adjust game area margin if controls overlap */
+@media (hover: none) and (pointer: coarse) and (max-height: 500px) {
+    #game-area {
+        margin-bottom: 150px; /* Add space at the bottom on short screens */
+    }
+}

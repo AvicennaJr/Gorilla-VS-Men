@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> <!-- Added user-scalable=no -->
     <title>100 Men vs Gorilla!</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -17,6 +17,15 @@
 
     <div id="info">
         Men Booped: <span id="score">0</span> / 100
+    </div>
+
+     <div id="touch-controls">
+        <div class="d-pad">
+            <button id="btn-up" class="d-pad-btn d-pad-up">▲</button>
+            <button id="btn-left" class="d-pad-btn d-pad-left">◀</button>
+            <button id="btn-right" class="d-pad-btn d-pad-right">▶</button>
+            <button id="btn-down" class="d-pad-btn d-pad-down">▼</button>
+        </div>
     </div>
 
     <div id="message" class="hidden">
