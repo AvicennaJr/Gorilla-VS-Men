@@ -118,7 +118,7 @@ h1 {
 #touch-controls {
     position: fixed; /* Keep it fixed on the screen */
     bottom: 15px;    /* Slightly adjust positioning */
-    left: 15px;
+    left: 50px;
     z-index: 50;
     opacity: 0.75;   /* Slightly less transparent */
     display: none;   /* Keep hidden by default */
@@ -175,13 +175,13 @@ h1 {
 }
 
 .d-pad-left {
-    left: 0;
+    left: -30px;
     top: calc(50% - 32.5px); /* Center based on new 65px height */
      border-radius: 15px 5px 5px 15px; /* More rounded left */
 }
 
 .d-pad-right {
-    right: 0;
+    right: -30px;
     top: calc(50% - 32.5px);
      border-radius: 5px 15px 15px 5px; /* More rounded right */
 }
