@@ -113,98 +113,98 @@ h1 {
 }
 
 
-/* Add these styles to your existing style.css */
+/* === REVISED TOUCH CONTROLS CSS === */
 
 #touch-controls {
     position: fixed; /* Keep it fixed on the screen */
-    bottom: 20px;
-    left: 20px;
-    z-index: 50; /* Ensure it's above game area if overlapping */
-    opacity: 0.7; /* Make it slightly transparent */
-    /* Hide on non-touch devices (optional but recommended) */
-    display: none;
+    bottom: 15px;    /* Slightly adjust positioning */
+    left: 15px;
+    z-index: 50;
+    opacity: 0.75;   /* Slightly less transparent */
+    display: none;   /* Keep hidden by default */
 }
 
-/* Show controls only on touch devices using media query */
+/* Show controls only on touch devices */
 @media (hover: none) and (pointer: coarse) {
   #touch-controls {
     display: block;
   }
-    /* Optionally hide the keyboard instruction text */
-    body > p {
-        /* Adjust selector if your <p> is structured differently */
-        /* display: none; */ /* Uncomment if you want to hide text */
-    }
 }
 
-
 .d-pad {
-    position: relative;
-    width: 120px; /* Adjust size as needed */
-    height: 120px;
-    transform: rotate(45deg); /* Rotate the container for diamond shape */
+    position: relative; /* Crucial for absolute positioning of children */
+    width: 150px;      /* INCREASED SIZE */
+    height: 150px;     /* INCREASED SIZE */
+    /* transform: rotate(45deg); /* Keep the container rotated */
+    /* Let's try a simpler square layout first, then try rotate again if needed */
 }
 
 .d-pad-btn {
     position: absolute;
-    width: 50px; /* Size of individual buttons */
-    height: 50px;
-    background-color: rgba(100, 100, 100, 0.8);
-    border: 2px solid rgba(50, 50, 50, 0.9);
+    width: 65px;       /* INCREASED SIZE */
+    height: 65px;      /* INCREASED SIZE */
+    background-color: rgba(80, 80, 80, 0.8); /* Darker gray */
+    border: 2px solid rgba(40, 40, 40, 0.9);
     color: white;
-    font-size: 20px;
+    font-size: 28px;   /* Larger arrows */
     font-weight: bold;
-    display: flex;
+    display: flex;     /* Use flexbox for centering */
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    user-select: none; /* Prevent text selection */
-    -webkit-user-select: none; /* Safari */
-    -webkit-tap-highlight-color: transparent; /* Remove tap highlight */
-    transform-origin: center center;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    border-radius: 15px; /* Rounded corners for the square layout */
+    box-sizing: border-box; /* Include border in size */
 }
 
-/* Un-rotate the text/icons inside the buttons */
-.d-pad-btn span, .d-pad-btn {
-     transform: rotate(-45deg);
-}
+/* --- Positioning for a standard PLUS (+) shape --- */
+/* Adjust if sticking with the rotated diamond */
 
-
-/* Positioning the diamond buttons */
 .d-pad-up {
     top: 0;
-    left: calc(50% - 25px); /* Center horizontally */
-    border-radius: 50% 50% 0 0; /* Rounded top */
+    left: calc(50% - 32.5px); /* Center based on new 65px width */
+    border-radius: 15px 15px 5px 5px; /* More rounded top */
 }
 
 .d-pad-down {
     bottom: 0;
-    left: calc(50% - 25px); /* Center horizontally */
-    border-radius: 0 0 50% 50%; /* Rounded bottom */
+    left: calc(50% - 32.5px);
+    border-radius: 5px 5px 15px 15px; /* More rounded bottom */
 }
 
 .d-pad-left {
     left: 0;
-    top: calc(50% - 25px); /* Center vertically */
-     border-radius: 50% 0 0 50%; /* Rounded left */
+    top: calc(50% - 32.5px); /* Center based on new 65px height */
+     border-radius: 15px 5px 5px 15px; /* More rounded left */
 }
 
 .d-pad-right {
     right: 0;
-    top: calc(50% - 25px); /* Center vertically */
-     border-radius: 0 50% 50% 0; /* Rounded right */
+    top: calc(50% - 32.5px);
+     border-radius: 5px 15px 15px 5px; /* More rounded right */
 }
+
+/* --- End of standard PLUS (+) shape positioning --- */
 
 
 /* Style for when button is being pressed */
 .d-pad-btn:active {
-    background-color: rgba(50, 50, 50, 1);
-    transform: rotate(-45deg) scale(0.95); /* Add slight shrink effect */
+    background-color: rgba(40, 40, 40, 1);
+    transform: scale(0.96); /* Keep slight shrink effect */
 }
 
 /* Adjust game area margin if controls overlap */
-@media (hover: none) and (pointer: coarse) and (max-height: 500px) {
+@media (hover: none) and (pointer: coarse) and (max-height: 550px) { /* Increased height trigger */
     #game-area {
-        margin-bottom: 150px; /* Add space at the bottom on short screens */
+        margin-bottom: 180px; /* Increased space */
+    }
+    /* Optional: Scale down controls slightly on very short screens */
+    #touch-controls {
+       /* transform: scale(0.9); */
+       /* transform-origin: bottom left; */
     }
 }
+
+/* === END OF REVISED TOUCH CONTROLS CSS === */
